@@ -22,11 +22,11 @@ module.exports={
         const newItem=object;
         newItem.ownerId=id;
         newItem.id=uuidv4();
-        if(newItem.deliveryType.shipping==true){
-            newItem.deliveryType="shipping";
+        if(newItem.delivery.shipping==true){
+            newItem.deliverye="shipping";
         }
-        if(newItem.deliveryType.pickup==true){
-            newItem.deliveryType="pickup";
+        if(newItem.delivery.pickup==true){
+            newItem.delivery="pickup";
         }
         
         newItem.date=getDate();
