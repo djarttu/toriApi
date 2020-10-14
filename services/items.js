@@ -1,41 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
-let items={items:[{
-    "title": "asdsd",
-    "desc": "hyvä",
-    "location": "oulu",
-    "images": "2",
-    "deliveryType": "pickup",
-    "category": "sd",
-    "price": "100€",
-    "ownerId": "456417a4-74bd-463b-8d45-a7008663fe8c",
-    "id": "844d5307-85a7-44b7-b5e7-cdfb77693878",
-    "date": "18:29 14.10.2020"
-},
-{
-    "title": "asdsd",
-    "desc": "hyvä",
-    "location": "tryäää",
-    "images": "2",
-    "deliveryType": "pickup",
-    "category": "oulu",
-    "price": "100€",
-    "ownerId": "456417a4-74bd-463b-8d45-a7008663fe8c",
-    "id": "5cd1035d-1ff7-4ef1-9d1f-b8bc11c71919",
-    "date": "18:29 14.10.2020"
-},
-{
-    "title": "asdsd",
-    "desc": "hyvä",
-    "location": "ei",
-    "images": "2",
-    "deliveryType": "pickup",
-    "category": "ei",
-    "price": "100€",
-    "ownerId": "456417a4-74bd-463b-8d45-a7008663fe8c",
-    "id": "60a5dd9c-565f-495b-931d-dd3410968007",
-    "date": "18:29 14.10.2020"
-}]};
+let items={items:[]};
 
 
 function getDate(){
