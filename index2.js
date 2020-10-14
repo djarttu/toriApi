@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 //const { v4: uuidv4 } = require('uuid');
 const app = express()
-const port = 3000
+var port = process.env.PORT ||8080;
 const cookieParser =require('cookie-parser')
 require ('dotenv').config()
 app.use(bodyParser.json());
@@ -277,6 +277,6 @@ app.put('/sensors/:id/',(req, res)=>{
         
 })
 
-/*app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
-})*/
+})
