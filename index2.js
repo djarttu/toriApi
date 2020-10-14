@@ -9,7 +9,9 @@ require ('dotenv').config()
 app.use(bodyParser.json());
 const users = require('./services/users')
 app.use(cookieParser());
-
+app.use(express.static('public'));app.get('/', (req, res) => {
+    res.sendFile('index.html', {root: __dirname + '/public/'});
+});
 const items = require('./services/items');
 const passport=require('passport');
 const { getItemById } = require('./services/items');
