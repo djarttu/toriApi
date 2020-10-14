@@ -1,6 +1,60 @@
-<html>
-<h1>
-    "Otsikko"
-</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui.css" >
+  <style>
+    html
+    {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    *,
+    *:before,
+    *:after
+    {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin:0;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<div id="swagger-ui"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-standalone-preset.js"> </script>
+<script>
+window.onload = function() {
+
+  var spec = {"openapi": "3.0.0", "info": {"title": "hugetoriapi", "version": "1.0", "description": ""}, "servers": [{"url": "https://hugetoriapi.herokuapp.com/"}], "paths": {"/registerUser": {"post": {"summary": "", "operationId": "post-registerUser", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"status": {"type": "string"}}}, "examples": {"example-1": {"value": {"status": "user created"}}}}}}}, "requestBody": {"content": {"application/json": {"schema": {"type": "object", "properties": {"user": {"type": "string"}, "email": {"type": "string"}, "password": {"type": "string"}}, "required": ["user", "email", "password"]}}}}, "description": "User can register "}}, "/login": {"get": {"summary": "Your GET endpoint", "tags": [], "responses": {"200": {"description": "OK", "content": {"text/html": {"schema": {"type": "string"}, "examples": {"\"X-Api-Key\"": {"value": "ea9d16bd-d03c-4bd6-a794-0b30831a2d9f"}}}}}, "401": {"description": "Unauthorized"}}, "operationId": "get-login", "parameters": [], "security": [{"Http Basic Auth": []}], "description": "User can login using basic http authentication. Gets apikey in response."}}, "/addItem": {"post": {"summary": "", "operationId": "post-addItem", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"message": {"type": "string"}}}}}}, "400": {"description": "Bad Request"}, "401": {"description": "Unauthorized"}}, "parameters": [{"schema": {"type": "string"}, "in": "header", "name": "X-Api-Key", "required": true}, {"schema": {"type": "string"}, "in": "header"}], "requestBody": {"content": {"application/json": {"schema": {"type": "object", "properties": {"title": {"type": "string"}, "desc": {"type": "string"}, "location": {"type": "string"}, "images": {"type": "string"}, "price": {"type": "string"}, "category": {"type": "string"}, "delivery": {"type": "object", "required": ["shipping", "pickup"], "properties": {"shipping": {"type": "boolean"}, "pickup": {"type": "boolean"}}}}, "required": ["title", "desc", "location", "images", "price", "category", "delivery"]}, "examples": {"example-1": {"value": {"title": "string", "desc": "string", "location": "string", "images": "string", "price": "string", "category": "string", "delivery": {"shipping": true, "pickup": true}}}}}}}, "security": [], "description": "User can add items. Authorized by apikey"}}, "/items": {"get": {"summary": "Your GET endpoint", "tags": [], "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"description": "", "type": "object", "properties": {"items": {"type": "array", "uniqueItems": true, "minItems": 1, "items": {"required": ["title", "desc", "location", "images", "deliveryType", "category", "price", "date"], "properties": {"title": {"type": "string", "minLength": 1}, "desc": {"type": "string", "minLength": 1}, "location": {"type": "string", "minLength": 1}, "images": {"type": "string", "minLength": 1}, "deliveryType": {"type": "string", "minLength": 1}, "category": {"type": "string", "minLength": 1}, "price": {"type": "string", "minLength": 1}, "date": {"type": "string", "minLength": 1}}}}}, "required": ["items"]}}}}}, "operationId": "get-items", "security": [], "description": "users can get all items without login"}}, "/ownItems": {"get": {"summary": "Your GET endpoint", "tags": [], "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"description": "", "type": "object", "properties": {"items": {"type": "array", "uniqueItems": true, "minItems": 1, "items": {"required": ["title", "desc", "location", "images", "deliveryType", "category", "price", "ownerId", "id", "date"], "properties": {"title": {"type": "string", "minLength": 1}, "desc": {"type": "string", "minLength": 1}, "location": {"type": "string", "minLength": 1}, "images": {"type": "string", "minLength": 1}, "deliveryType": {"type": "string", "minLength": 1}, "category": {"type": "string", "minLength": 1}, "price": {"type": "string", "minLength": 1}, "ownerId": {"type": "string", "minLength": 1}, "id": {"type": "string", "minLength": 1}, "date": {"type": "string", "minLength": 1}}}}}, "required": ["items"]}}}}}, "operationId": "get-ownItems", "parameters": [{"schema": {"type": "string"}, "in": "header", "name": "X-Api-Key"}], "security": [], "description": "User can get own items. Authorized by apikey"}}, "/modifyItem": {"put": {"summary": "", "operationId": "put-modifyItem", "responses": {"200": {"description": "OK"}}, "parameters": [{"schema": {"type": "string"}, "in": "header", "name": "X-Api-Key", "required": true}], "requestBody": {"content": {"application/json": {"schema": {"description": "", "type": "object", "properties": {"id": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 1}, "desc": {"type": "string", "minLength": 1}, "location": {"type": "string", "minLength": 1}, "images": {"type": "string", "minLength": 1}, "price": {"type": "string", "minLength": 1}, "category": {"type": "string", "minLength": 1}, "delivery": {"type": "object", "properties": {"shipping": {"type": "boolean"}, "pickup": {"type": "boolean"}}}}, "required": ["id"]}, "examples": {"example-1": {"value": {}}}}, "application/xml": {"schema": {"description": "", "type": "object", "properties": {"id": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 1}, "desc": {"type": "string", "minLength": 1}, "location": {"type": "string", "minLength": 1}, "images": {"type": "string", "minLength": 1}, "price": {"type": "string", "minLength": 1}, "category": {"type": "string", "minLength": 1}, "delivery": {"type": "object", "properties": {"shipping": {"type": "boolean"}, "pickup": {"type": "boolean"}}}}, "required": ["id"]}}}, "description": ""}, "security": [], "description": "User can modify own items. Authorized by apikey."}}, "/items/{id}/": {"delete": {"summary": "", "operationId": "delete-items-:id", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"status": {"type": "string"}}}, "examples": {"example-1": {"value": {"status": "item deleted"}}}}}}, "400": {"description": "Bad Request"}, "401": {"description": "Unauthorized"}}, "parameters": [{"schema": {"type": "string"}, "in": "query", "name": "id", "required": true}, {"schema": {"type": "string"}, "in": "header", "name": "X-Api-Key", "required": true}], "description": "User can delete owned item passing items id in path parameter. Authorized by apikey.", "security": []}, "parameters": []}, "/item/{keyword}/": {"get": {"summary": "Your GET endpoint", "tags": [], "responses": {}, "operationId": "get-item-:keyword", "parameters": [{"schema": {"type": "string"}, "in": "query", "name": "keyword"}], "description": "User can filter items by passing location or category in requests path parameter."}, "parameters": []}}, "components": {"schemas": {}, "securitySchemes": {"Http Basic Auth": {"type": "http", "scheme": "basic"}}}};
+
+  // Build a system
+  const ui = SwaggerUIBundle({
+    spec: spec,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+
+  window.ui = ui
+}
+</script>
+</body>
 
 </html>
