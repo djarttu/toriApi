@@ -104,7 +104,7 @@ app.post('/addItem', checkForApiKey,(req, res)=>{
         res.status(400);
         return;
     }
-    if('deliveryType' in req.body==false){
+    if('delivery' in req.body==false){
         res.status(400);
         return;
     }
