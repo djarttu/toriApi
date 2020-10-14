@@ -79,11 +79,11 @@ module.exports={
     deleteItem:(itemId)=>{
         const result = items.items.findIndex(t => t.id == itemId);
     if(result !== -1){
-        todos.splice(result, 1);
-        res.sendStatus(200);
+        items.items.splice(result, 1);
+        return (200);
     }
     else {
-        res.sendStatus(404);
+        return (404);
     }
        
 }

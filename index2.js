@@ -143,6 +143,8 @@ app.delete('/delItems', checkForApiKey, async (req, res)=>{
         res.status(400).json({status:"wrong user"});
         return;
     }
+
+
     items.deleteItem(req.body.id);
     res.status(200).json({status:"item deleted"})
     
@@ -173,42 +175,13 @@ app.get('/ownItems', checkForApiKey, (req, res) => {
     res.json(items.getOwnItems(req.user.id));
 })
 
-app.get('/todos/:id', (req, res) => {
-    //res.send('You requested id ' + req.params.id);
-    const result = todos.find(t => t.id == req.params.id); // === specific vs == best effort
-    if (result !== undefined) {
-        res.json(result);
-    }
-    else {
-        res.sendStatus(404);
-    }
-})
 
 
 
  
 
 
-app.post('/sensors',(req, res)=>{
-    
-    
-    if(ifEmpty(req.body)!==false)
-    {
-        
-        console.log("pitäs lisätä listaan sensori")
-        const newSensors=req.body;
-        newSensors.id=uuidv4();
-        newSensors.values=[];
-        sensors.sensorList.push(newSensors);
-        res.json({"id":newSensors.id});
-        res.status(200);
-        uuidv4();
-    
-    }
-    else
-        res.status(400);
-      
-})
+
 
 
 function ifEmpty(Object){
@@ -227,57 +200,7 @@ function ifEmpty(Object){
 }
     
 
-app.put('/todos/:id', (req, res) => {
-    const result = todos.find(t => t.id == req.params.id);
-    if (result !== undefined) {
-        for (const key in req.body){
-            result[key] = req.body[key];
-        }
-        res.sendStatus(200);
-    }
-    else {
-        res.sendStatus(404);
-    }
-})
-app.get('/sensors/:id/values',(req, res)=>{
-    console.log(req.params.id);
-    const result=sensors.sensorList.find(t=>t.id==req.params.id)
-    if(result!==undefined){
-        var jsonObject={"values":result.values}
-        res.send(jsonObject);
-    }
-})
 
-app.delete('/todo/:id', async (req, res) => {
-    
-    const result = todos.findIndex(t => t.id == req.params.id);
-    if(result !== -1){
-        todos.splice(result, 1);
-        res.sendStatus(200);
-    }
-    else {
-        res.sendStatus(404);
-    }
-})
-
-app.put('/sensors/:id/',(req, res)=>{
-    console.log(req.params.id);
-    const result=sensors.sensorList.find(t=>t.id==req.params.id)
-    //console.log(result);
-    if(result!==undefined)
-        {
-            console.log(result);
-            console.log(req.body);
-            result.values.push(req.body.value);
-            res.json(sensors);
-        }
-    else
-        {
-            console.log("ei löyttny")
-        }
-    
-        
-})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
