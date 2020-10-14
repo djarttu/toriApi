@@ -38,6 +38,12 @@ passport.use(new BasicStrategy(
     
 ));
 
+app.get('/items/:keyword', (req, res)=>{
+    result =items.getItemByKeyword(req.params.keyword);
+    res.json(result);
+})
+
+
 app.get('/login', 
         passport.authenticate('basic', {session:false}),
         (req, res)=>{
@@ -54,11 +60,11 @@ app.get('/login',
 function checkForApiKey(req, res, next){
     const receivedKey=req.get('X-Api-Key');
     if (receivedKey===undefined){
-        return res.status(400).json({message:"ApiKey missing"});
+        return res.status(401).json({message:"ApiKey missing"});
     }
     const user =users.getUserWithApiKey(receivedKey);
     if(user===undefined){
-        return res.status(400).json({message:"Wrong ApiKey"});
+        return res.status(401).json({message:"Wrong ApiKey"});
     }
     req.user=user;
     next();    
@@ -131,9 +137,9 @@ app.post('/registerUser',(req, res)=>{
    res.status(201).json({status:"user created"})
 })
 
-app.delete('/delItems', checkForApiKey, async (req, res)=>{
-    console.log(req.query.id);
-    const item = items.getItemById(req.query.id);
+app.delete('/items/:id', checkForApiKey, async (req, res)=>{
+    console.log(req.params.id);
+    const item = items.getItemById(req.params.id);
     if(item==undefined)
     {
         res.status(400).json({status:"wrong itemID"});
@@ -141,12 +147,12 @@ app.delete('/delItems', checkForApiKey, async (req, res)=>{
     }
     if(item.ownerId!==req.user.id)
     {
-        res.status(400).json({status:"wrong user"});
+        res.status(401).json({status:"wrong user"});
         return;
     }
 
 
-    items.deleteItem(req.query.id);
+    items.deleteItem(req.params.id);
     res.status(200).json({status:"item deleted"})
     
     

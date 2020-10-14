@@ -1,7 +1,12 @@
 const { v4: uuidv4 } = require('uuid');
 let users={users:[
-    {
-        
+    
+        {
+              id: '456417a4-74bd-463b-8d45-a7008663fe8c',
+              username: 'arttu',
+              email: 'homo',
+              password: '$2a$06$MRZOCOxz8FopQeNu65SyoO12KMM3M5uheUjgjIX6/N1sFxNvSmiJu',
+            validApiKey:'ea9d16bd-d03c-4bd6-a794-0b30831a2d9f'
     }
 ]};
 

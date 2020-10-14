@@ -1,6 +1,43 @@
 const { v4: uuidv4 } = require('uuid');
 
-let items={items:[]};
+let items={items:[{
+    "title": "asdsd",
+    "desc": "hyvä",
+    "location": "oulu",
+    "images": "2",
+    "deliveryType": "pickup",
+    "category": "sd",
+    "price": "100€",
+    "ownerId": "456417a4-74bd-463b-8d45-a7008663fe8c",
+    "id": "844d5307-85a7-44b7-b5e7-cdfb77693878",
+    "date": "18:29 14.10.2020"
+},
+{
+    "title": "asdsd",
+    "desc": "hyvä",
+    "location": "tryäää",
+    "images": "2",
+    "deliveryType": "pickup",
+    "category": "oulu",
+    "price": "100€",
+    "ownerId": "456417a4-74bd-463b-8d45-a7008663fe8c",
+    "id": "5cd1035d-1ff7-4ef1-9d1f-b8bc11c71919",
+    "date": "18:29 14.10.2020"
+},
+{
+    "title": "asdsd",
+    "desc": "hyvä",
+    "location": "ei",
+    "images": "2",
+    "deliveryType": "pickup",
+    "category": "ei",
+    "price": "100€",
+    "ownerId": "456417a4-74bd-463b-8d45-a7008663fe8c",
+    "id": "60a5dd9c-565f-495b-931d-dd3410968007",
+    "date": "18:29 14.10.2020"
+}]};
+
+
 function getDate(){
     let date_ob = new Date();
         let date = ("0" + date_ob.getDate()).slice(-2);
@@ -85,6 +122,34 @@ module.exports={
     else {
         return (404);
     }
+     
+},
+getItemByKeyword:(kw)=>{
+    
+        const result ={items:[]};
+        const sobj =JSON.parse(JSON.stringify(items.items.filter(u => u.category==kw)));
+        let array= sobj;
+        for(let i=0; i<array.length;i++){
+            delete array[i].ownerId;
+            delete array[i].id;
+            result.items.push(array[i]);
+        }
+        const sobj2=JSON.parse(JSON.stringify(items.items.filter(u => u.location==kw)));
+        let array2=sobj2;
+        for(let i=0; i<array2.length;i++){
+            delete array2[i].ownerId;
+            delete array2[i].id;
+            result.items.push(array2[i]);
+        }
+        
+            
+        
+        
+
        
-}
+        return result;
+        }
+
+
+
 }
