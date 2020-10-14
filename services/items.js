@@ -22,13 +22,17 @@ module.exports={
         const newItem=object;
         newItem.ownerId=id;
         newItem.id=uuidv4();
-        if(newItem.delivery.shipping==true){
-            newItem.deliverye="shipping";
+        if(newItem.delivery.shipping==true&&newItem.delivery.pickup==true){
+            newItem.delivery.shipping ="shipping, pickup";
         }
+        else{
+            if(newItem.delivery.shipping==true){
+            newItem.delivery="shipping";
+            }
         if(newItem.delivery.pickup==true){
             newItem.delivery="pickup";
         }
-        
+    }
         newItem.date=getDate();
         items.items.push(newItem);
         console.log(items);
