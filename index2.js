@@ -132,7 +132,8 @@ app.post('/registerUser',(req, res)=>{
 })
 
 app.delete('/delItems', checkForApiKey, async (req, res)=>{
-    const item = items.getItemById(req.body.id);
+    console.log(req.query.id);
+    const item = items.getItemById(req.query.id);
     if(item==undefined)
     {
         res.status(400).json({status:"wrong itemID"});
@@ -145,7 +146,7 @@ app.delete('/delItems', checkForApiKey, async (req, res)=>{
     }
 
 
-    items.deleteItem(req.body.id);
+    items.deleteItem(req.query.id);
     res.status(200).json({status:"item deleted"})
     
     
